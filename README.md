@@ -33,11 +33,8 @@ python3 train.py --eval_datasets_folder=/path/to/your/datasets_vg/datasets --eva
 ```
 
 ## Test
-
-To evaluate the trained model:
-
 ```
-python3 eval.py --eval_datasets_folder=/path/to/your/datasets_vg/datasets --eval_dataset_name=pitts30k --resume=/path/to/trained/model/SuperVLAD.pth --backbone=dino --supervlad_clusters=4 --crossimage_encoder
+python3 eval.py --eval_datasets_folder=/path/to/your/datasets_vg/datasets --eval_dataset_name=pitts30k --resume=/path/to/trained/model/SuperVLAD.pth --backbone=dino --supervlad_clusters=4 --crossimage_encoder --infer_batch_size 8
 ```
 
 ## SuperVLAD without cross-image encoder
@@ -46,9 +43,7 @@ Remove parameter `--crossimage_encoder` to run the SuperVLAD without cross-image
 
 ## 1-cluster VLAD
 
-Set `--supervlad_clusters=1` and `--ghost_clusters=2` to run the 1-cluster VLAD.
-
-For example,
+Set `--supervlad_clusters=1` and `--ghost_clusters=2` to run the 1-cluster VLAD. For example,
 
 ```
 python3 eval.py --eval_datasets_folder=/path/to/your/datasets_vg/datasets --eval_dataset_name=pitts30k --resume=/path/to/trained/model/SuperVLAD.pth --backbone=dino --supervlad_clusters=1 --ghost_clusters=2
