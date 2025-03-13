@@ -118,6 +118,6 @@ class SuperVLAD(nn.Module):
                     descriptors[startix:startix + descs_num_per_image, :] = image_descriptors[ix, sample, :]
         kmeans = faiss.Kmeans(args.features_dim, self.clusters_num, niter=100, verbose=False)
         kmeans.train(descriptors)
-        logging.debug(f"SuperVLAD centroids shape: {kmeans.centroids.shape}")
+        logging.debug(f"All clusters shape: {kmeans.centroids.shape}")
         self.init_params(kmeans.centroids, descriptors)
         self = self.to(args.device)
