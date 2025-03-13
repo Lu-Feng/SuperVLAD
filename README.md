@@ -29,12 +29,12 @@ Before training, you should download the pre-trained foundation model DINOv2(ViT
 
 ## Train
 ```
-python3 train.py --eval_datasets_folder=/path/to/your/datasets_vg/datasets --eval_dataset_name=pitts30k --foundation_model_path=/path/to/pre-trained/dinov2_vitb14_pretrain.pth --backbone=dino --supervlad_clusters=4 --crossimage_encoder --patience=3 --lr=0.00005 --epochs_num=20 --train_batch_size=120 --freeze_te 8
+python3 train.py --eval_datasets_folder=/path/to/your/datasets_vg/datasets --eval_dataset_name=msls --foundation_model_path=/path/to/pre-trained/dinov2_vitb14_pretrain.pth --backbone=dino --supervlad_clusters=4 --crossimage_encoder --patience=3 --lr=0.00005 --epochs_num=20 --train_batch_size=120 --freeze_te=8
 ```
 
 ## Test
 ```
-python3 eval.py --eval_datasets_folder=/path/to/your/datasets_vg/datasets --eval_dataset_name=pitts30k --resume=/path/to/trained/model/SuperVLAD.pth --backbone=dino --supervlad_clusters=4 --crossimage_encoder --infer_batch_size 8
+python3 eval.py --eval_datasets_folder=/path/to/your/datasets_vg/datasets --eval_dataset_name=msls --resume=/path/to/trained/model/SuperVLAD.pth --backbone=dino --supervlad_clusters=4 --crossimage_encoder --infer_batch_size=8
 ```
 
 ## SuperVLAD without cross-image encoder
@@ -46,7 +46,7 @@ Remove parameter `--crossimage_encoder` to run the SuperVLAD without cross-image
 Set `--supervlad_clusters=1` and `--ghost_clusters=2` to run the 1-cluster VLAD. For example,
 
 ```
-python3 eval.py --eval_datasets_folder=/path/to/your/datasets_vg/datasets --eval_dataset_name=pitts30k --resume=/path/to/trained/model/SuperVLAD.pth --backbone=dino --supervlad_clusters=1 --ghost_clusters=2
+python3 eval.py --eval_datasets_folder=/path/to/your/datasets_vg/datasets --eval_dataset_name=msls --resume=/path/to/trained/model/1-clusterVLAD.pth --backbone=dino --supervlad_clusters=1 --ghost_clusters=2
 ```
 
 ## Trained Model
@@ -62,13 +62,13 @@ python3 eval.py --eval_datasets_folder=/path/to/your/datasets_vg/datasets --eval
   <tbody>
     <tr>
       <td>SuperVLAD</td>
-      <td align="center">:x:</td>
-      <td><a href="https://drive.google.com/file/d/1wRkUO4E8s5hNRNNIWcuA8RUvlGob3Tbf/view?usp=drive_link">LINK</a></td>
+      <td align="center">:white_check_mark:</td>
+      <td><a href="https://drive.google.com/file/d/1yomnWGTJko6nf3F2Ju6RWsLhP2EG82tL/view?usp=drive_link">LINK</a></td>
     </tr>
     <tr>
       <td>SuperVLAD</td>
-      <td align="center">:white_check_mark:</td>
-      <td><a href="https://drive.google.com/file/d/1yomnWGTJko6nf3F2Ju6RWsLhP2EG82tL/view?usp=drive_link">LINK</a></td>
+      <td align="center">:x:</td>
+      <td><a href="https://drive.google.com/file/d/1wRkUO4E8s5hNRNNIWcuA8RUvlGob3Tbf/view?usp=drive_link">LINK</a></td>
     </tr>
   </tbody>
 </table>
