@@ -68,12 +68,12 @@ python3 eval.py --eval_datasets_folder=/path/to/your/datasets_vg/datasets --eval
     <tr>
       <td>SuperVLAD</td>
       <td align="center">:x:</td>
-      <td><a href="`https://drive.google.com/file/d/1wRkUO4E8s5hNRNNIWcuA8RUvlGob3Tbf/view?usp=drive_link`">LINK</a></td>
+      <td><a href="https://drive.google.com/file/d/1wRkUO4E8s5hNRNNIWcuA8RUvlGob3Tbf/view?usp=drive_link">LINK</a></td>
     </tr>
     <tr>
       <td>SuperVLAD</td>
       <td align="center">:white_check_mark:</td>
-      <td><a href="`https://drive.google.com/file/d/1yomnWGTJko6nf3F2Ju6RWsLhP2EG82tL/view?usp=drive_link`">LINK</a></td>
+      <td><a href="https://drive.google.com/file/d/1yomnWGTJko6nf3F2Ju6RWsLhP2EG82tL/view?usp=drive_link">LINK</a></td>
     </tr>
   </tbody>
 </table>
