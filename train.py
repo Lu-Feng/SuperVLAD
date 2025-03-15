@@ -173,6 +173,9 @@ def loss_function(descriptors, labels):
     return loss
 
 #### Training loop
+if args.mixed_precision:   # For training with Automatic Mixed Precision
+    from torch.cuda.amp import autocast, GradScaler
+    scaler = GradScaler()
 ds = DataLoader(dataset=train_dataset, **train_loader_config)
 scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=len(ds)*3, gamma=0.5, last_epoch=-1)
 # scheduler = torch.optim.lr_scheduler.LinearLR(optimizer, start_factor=1, end_factor=0.15, total_iters=4000)
@@ -189,23 +192,37 @@ for epoch_num in range(start_epoch_num, args.epochs_num):
         images = images.view(BS*N, ch, h, w)
         labels = place_id.view(-1)
 
-        descriptors = model(images.to(args.device))
-        descriptors = descriptors.cuda()
-        loss = loss_function(descriptors, labels) # Call the loss_function we defined above     
-        del descriptors
-        
-        optimizer.zero_grad()
-        loss.backward()
+        if not args.mixed_precision:
+            descriptors = model(images.to(args.device))
+            descriptors = descriptors.cuda()
+            loss = loss_function(descriptors, labels) # Call the loss_function we defined above     
+            del descriptors
+            
+            optimizer.zero_grad()
+            loss.backward()
+            if args.crossimage_encoder:
+                for p in model.module.encoder.parameters():
+                    p.requires_grad = True
+                optim_encoder.step() 
+                for p in model.module.encoder.parameters():
+                    p.requires_grad = False 
+            optimizer.step()
+            scheduler.step()     
 
-        if args.crossimage_encoder:
-            for p in model.module.encoder.parameters():
-                p.requires_grad = True
-            optim_encoder.step() 
-            for p in model.module.encoder.parameters():
-                p.requires_grad = False 
-
-        optimizer.step()
-        scheduler.step()       
+        # Training with Automatic Mixed Precision for faster training speed and less GPU memory usage. 
+        # In this case, the cross-image encoder is not optimized separately and may not perform well.
+        else:
+            with autocast():
+                descriptors = model(images.to(args.device))
+                descriptors = descriptors.cuda()
+                loss = loss_function(descriptors, labels) # Call the loss_function we defined above     
+            del descriptors
+            
+            optimizer.zero_grad() 
+            scaler.scale(loss).backward()
+            scaler.step(optimizer)
+            scaler.update()
+            scheduler.step()       
         
         # Keep track of all losses by appending them to epoch_losses
         batch_loss = loss.item()
