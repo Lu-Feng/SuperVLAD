@@ -49,6 +49,10 @@ Set `--supervlad_clusters=1` and `--ghost_clusters=2` to run the 1-cluster VLAD.
 python3 eval.py --eval_datasets_folder=/path/to/your/datasets_vg/datasets --eval_dataset_name=msls --resume=/path/to/trained/model/1-clusterVLAD.pth --backbone=dino --supervlad_clusters=1 --ghost_clusters=2
 ```
 
+## Training with Automatic Mixed Precision
+
+If you want to train models with Automatic Mixed Precision for faster training speed and less GPU memory usage. Just add parameter `--mixed_precision`. In this case, the cross-image encoder is not optimized separately and may not perform well.
+
 ## Trained Model
 
 <table style="margin: auto">
@@ -69,6 +73,11 @@ python3 eval.py --eval_datasets_folder=/path/to/your/datasets_vg/datasets --eval
       <td>SuperVLAD</td>
       <td align="center">:x:</td>
       <td><a href="https://drive.google.com/file/d/1wRkUO4E8s5hNRNNIWcuA8RUvlGob3Tbf/view?usp=drive_link">LINK</a></td>
+    </tr>
+    <tr>
+      <td>1-ClusterVLAD</td>
+      <td align="center">:x:</td>
+      <td><a href="https://drive.google.com/file/d/1pQcJx9n2-keAh9TttssZkz6D0vjpFWU6/view?usp=drive_link">LINK</a></td>
     </tr>
   </tbody>
 </table>
