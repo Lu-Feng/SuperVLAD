@@ -23,6 +23,7 @@ def parse_arguments():
     parser.add_argument("--lr_encoder", type=float, default=0.0001, help="Learning rate for the cross-image encoder")
     parser.add_argument("--lr_crn_net", type=float, default=5e-4, help="Learning rate to finetune pretrained network when using CRN")
     parser.add_argument("--optim", type=str, default="adam", help="_", choices=["adam", "sgd", "adamw"])
+    parser.add_argument("--mixed_precision", action='store_true', help="Training with Automatic Mixed Precision")
     parser.add_argument("--cache_refresh_rate", type=int, default=1000,
                         help="How often to refresh cache, in number of queries")
     parser.add_argument("--queries_per_epoch", type=int, default=5000,
